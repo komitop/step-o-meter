@@ -1,0 +1,27 @@
+{
+  "name": "step-o-meter",
+  "version": "1.0.0",
+  "description": "This is a web app that logs steps for specific dates and produces reports based on these logs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/komitop/step-o-meter.git"
+  },
+  "author": "Danae Komitopoulou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/komitop/step-o-meter/issues"
+  },
+  "homepage": "https://github.com/komitop/step-o-meter#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  }
+}
