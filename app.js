@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const stepOMeterRoutes = require('./routes/step-o-meter');
 const sequelize = require('./utils/database');
 const User = require('./models/user');
+const StepReport = require('./models/stepReport');
 
 
 const app = express();
@@ -27,6 +28,12 @@ app.use((req, res, next) => {
 });
 
 app.use(stepOMeterRoutes);
+
+StepReport.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE'
+});
+User.hasMany(StepReport);
 
 sequelize
     .sync()
