@@ -4,13 +4,7 @@
 
     <body>
         <header>
-            <ul id="slide-out" class="sidenav sidenav-fixed">
-                <li class="logo"><a class="valign-wrapper">Step-o-Meter</a></li>
-                <hr />
-                <li class="<%= path === '/steps/add' ? 'active' : '' %>">
-                    <a href="/steps/add">Add Step</a>
-                </li>
-            </ul>
+            <%- include('./includes/side-nav.ejs') %>
         </header>
 
         <div class="section no-pad-bot">
@@ -34,7 +28,7 @@
                     </div>
                 <% } %>
                 <div class="row">
-                    <form class="col s6" action="/steps/add" method="POST">
+                    <form class="col s12" action="/steps/add" method="POST">
                         <div class="card-panel">
                             <div class="row">
                                 <div class="input-field col s12">

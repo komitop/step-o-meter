@@ -1,0 +1,16 @@
+header, main, footer, .section {
+    padding-left: 300px;
+}
+
+.logo a {
+    font-size: 20px !important;
+    text-align: center;
+    padding-top: 2rem !important;
+    padding-bottom: 5rem !important;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}

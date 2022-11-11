@@ -13,4 +13,7 @@ router.get('/', (req, res, next) => {
 router.get('/steps/add', stepReportController.getAddStep);
 router.post('/steps/add', stepReportController.postAddStep);
 
+router.get('/steps-history', stepReportController.getStepsHistory);
+router.post('/steps-history', stepReportController.postStepsHistory);
+
 module.exports = router;
