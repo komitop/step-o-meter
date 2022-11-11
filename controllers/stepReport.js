@@ -3,7 +3,8 @@ const StepReport = require('../models/stepReport');
 exports.getAddStep = (req, res, next) => {
     res.render('add-step', {
         showSuccessMsg: false,
-        errorMsg: null
+        errorMsg: null,
+        path: '/steps/add'
     });
 };
 
@@ -16,7 +17,8 @@ exports.postAddStep = (req, res, next) => {
             if (results && results.length > 0) {
                 res.render('add-step', {
                     showSuccessMsg: false,
-                    errorMsg: 'A value for this date has already been set.'
+                    errorMsg: 'A value for this date has already been set.',
+                    path: '/steps/add'
                 });
             } else {
                 req.user.createStepReport({
@@ -26,7 +28,8 @@ exports.postAddStep = (req, res, next) => {
                 .then(result => {
                     res.render('add-step', {
                         showSuccessMsg: true,
-                        errorMsg: null
+                        errorMsg: null,
+                        path: '/steps/add'
                     });
                 })
                 .catch(err => console.log(err));
