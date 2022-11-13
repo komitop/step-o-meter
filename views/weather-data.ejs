@@ -1,0 +1,55 @@
+<%- include('./includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/weather-data.css">
+    </head>
+
+    <body>
+        <header>
+            <%- include('./includes/side-nav.ejs') %>
+        </header>
+
+        <% if (weatherData && weatherData.length > 0) { %>
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <% weatherData.forEach(entry=> { %>
+                        <div class="row">
+                            <div class="col s12">
+                                <h3>Weather report for <%= entry.stepDate %></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card-panel">
+                                    <table class="striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th></th>
+                                                <th>Temp</th>
+                                                <th>Feels Like</th>
+                                                <th>Humidity</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <% entry.hourlyData.forEach(hourlyData => { %>
+                                                <tr>
+                                                    <td><%= hourlyData.datetime %></td>
+                                                    <td>
+                                                        <span class="material-symbols-outlined"><%= hourlyData.icon.replaceAll('-', '_') %></span>
+                                                    </td>
+                                                    <td><%= hourlyData.temp %> &#8451;</td>
+                                                    <td><%= hourlyData.feelslike %> &#8451;</td>
+                                                    <td><%= hourlyData.humidity %>%</td>
+                                                </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+            <% } %>
+
+            <%- include('./includes/end.ejs') %>

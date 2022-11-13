@@ -43,35 +43,35 @@
                     </div>
                 </div>
             </div>
-        <% } %>
+            <% } %>
 
-        <script src="/js/steps-history.js"></script>
-        <script type="text/javascript">
-            const ctx = document.getElementById('myChart').getContext('2d');
+                <script src="/js/steps-history.js"></script>
+                <script type="text/javascript">
+                    const ctx = document.getElementById('myChart').getContext('2d');
 
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: <%- JSON.stringify(datesOfSteps) %>,
-                    datasets: [{
-                        label: '# of Steps',
-                        data: <%- JSON.stringify(steps) %>,
-                        backgroundColor: [
-                            'rgba(255, 152, 0, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 152, 0, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: <%- JSON.stringify(datesOfSteps) %>,
+                            datasets: [{
+                                label: '# of Steps',
+                                data: <%- JSON.stringify(steps) %>,
+                                backgroundColor: [
+                                    'rgba(255, 152, 0, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 152, 0, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
-                    }
-                }
-            });
-        </script>
-        <%- include('./includes/end.ejs') %>
+                    });
+                </script>
+                <%- include('./includes/end.ejs') %>

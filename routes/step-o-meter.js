@@ -16,4 +16,6 @@ router.post('/steps/add', stepReportController.postAddStep);
 router.get('/steps-history', stepReportController.getStepsHistory);
 router.post('/steps-history', stepReportController.postStepsHistory);
 
+router.get('/weather-data', stepReportController.getWeatherData);
+
 module.exports = router;
