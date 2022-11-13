@@ -1,6 +1,7 @@
 <%- include('./includes/head.ejs') %>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
         defer></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -32,5 +33,45 @@
             </div>
         </div>
 
+        <% if (datesOfSteps) { %>
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <canvas id="myChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
         <script src="/js/steps-history.js"></script>
+        <script type="text/javascript">
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(datesOfSteps) %>,
+                    datasets: [{
+                        label: '# of Steps',
+                        data: <%- JSON.stringify(steps) %>,
+                        backgroundColor: [
+                            'rgba(255, 152, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 152, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
         <%- include('./includes/end.ejs') %>

@@ -41,7 +41,8 @@ exports.postAddStep = (req, res, next) => {
 
 exports.getStepsHistory = (req, res, next) => {
     res.render('steps-history', {
-        stepReports: 0,
+        datesOfSteps: null,
+        steps: null,
         path: '/steps-history'
     });
 };
@@ -54,13 +55,13 @@ exports.postStepsHistory = (req, res, next) => {
 
             if (fromDateAsStrings && fromDateAsStrings.length == 3) {
                 let fromDate = new Date(parseInt(fromDateAsStrings[2]),
-                    parseInt(fromDateAsStrings[1])-1, parseInt(fromDateAsStrings[0]));
+                    parseInt(fromDateAsStrings[1]) - 1, parseInt(fromDateAsStrings[0]));
 
                 const toDateAsStrings = dates[1].split('/');
 
                 if (toDateAsStrings && toDateAsStrings.length == 3) {
                     let toDate = new Date(parseInt(toDateAsStrings[2]),
-                        parseInt(toDateAsStrings[1])-1, parseInt(toDateAsStrings[0]));
+                        parseInt(toDateAsStrings[1]) - 1, parseInt(toDateAsStrings[0]));
 
 
                     StepReport.findAll({
@@ -72,9 +73,17 @@ exports.postStepsHistory = (req, res, next) => {
                             }
                         }
                     })
-                        .then(results => {
+                        .then(stepReports => {
+                            let datesOfSteps = [];
+                            let steps = [];
+                            stepReports.forEach(stepReport => {
+                                datesOfSteps.push(stepReport.occuredAt.toLocaleDateString("el-GR"));
+                                steps.push(stepReport.steps);
+                            });
+
                             res.render('steps-history', {
-                                stepReports: results,
+                                datesOfSteps: datesOfSteps,
+                                steps: steps,
                                 path: '/steps-history'
                             });
                         })
