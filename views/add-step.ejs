@@ -38,18 +38,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <form class="col s12" action="/steps/add" method="POST">
+                    <form class="col s12" action="/steps/add" method="POST" novalidate>
                         <div class="card-panel">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="steps" name="steps" type="number" class="validate" required>
+                                    <!-- <input id="steps" name="steps" type="number" class="validate" required> -->
+                                    <input id="steps" name="steps" type="number" required>
                                     <label for="steps">Steps *</label>
+                                    <!-- <span class="helper-text" data-error="This is a required, numeric field" data-success=""></span> -->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input id="occuredAt" name="occuredAt" type="text" class="datepicker" class="validate" required>
                                     <label for="occuredAt">Day *</label>
+                                    <span class="helper-text" data-error="This is a required field" data-success=""></span>
                                 </div>
                             </div>
                             <button class="btn waves-effect waves-light" type="submit" name="action">

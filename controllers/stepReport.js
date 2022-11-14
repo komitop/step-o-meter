@@ -1,5 +1,6 @@
 const { Op, DataTypes } = require('sequelize');
 const Axios = require('axios');
+const { validationResult } = require('express-validator/check');
 
 const StepReport = require('../models/stepReport');
 
@@ -15,30 +16,25 @@ exports.postAddStep = (req, res, next) => {
     const steps = req.body.steps;
     const occuredAt = new Date(req.body.occuredAt);
 
-    req.user.getStepReports({ where: { occuredAt: occuredAt } })
-        .then(results => {
-            if (results && results.length > 0) {
-                res.render('add-step', {
-                    showSuccessMsg: false,
-                    errorMsg: 'A value for this date has already been set.',
-                    path: '/steps/add'
-                });
-            } else {
-                req.user.createStepReport({
-                    steps: steps,
-                    occuredAt: occuredAt
-                })
-                    .then(result => {
-                        res.render('add-step', {
-                            showSuccessMsg: true,
-                            errorMsg: null,
-                            path: '/steps/add'
-                        });
-                    })
-                    .catch(err => console.log(err));
-            }
-        })
-        .catch(err => console.log(err));
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).render('add-step', {
+            showSuccessMsg: false,
+            errorMsg: errors.array()[0].msg,
+            path: '/steps/add'
+        });
+    } else {
+        req.user.createStepReport({
+            steps: steps,
+            occuredAt: occuredAt
+        }).then(result => {
+            res.render('add-step', {
+                showSuccessMsg: true,
+                errorMsg: null,
+                path: '/steps/add'
+            });
+        }).catch(err => console.log(err));
+    }
 };
 
 exports.getStepsHistory = (req, res, next) => {
@@ -74,26 +70,22 @@ exports.postStepsHistory = (req, res, next) => {
                                 [Op.lte]: toDate,
                             }
                         }
-                    })
-                        .then(stepReports => {
-                            let datesOfSteps = [];
-                            let steps = [];
-                            stepReports.forEach(stepReport => {
-                                datesOfSteps.push(stepReport.occuredAt.toLocaleDateString("el-GR"));
-                                steps.push(stepReport.steps);
-                            });
+                    }).then(stepReports => {
+                        let datesOfSteps = [];
+                        let steps = [];
+                        stepReports.forEach(stepReport => {
+                            datesOfSteps.push(stepReport.occuredAt.toLocaleDateString("el-GR"));
+                            steps.push(stepReport.steps);
+                        });
 
-                            res.render('steps-history', {
-                                datesOfSteps: datesOfSteps,
-                                steps: steps,
-                                path: '/steps-history'
-                            });
-                        })
-                        .catch(err => console.log(err));
+                        res.render('steps-history', {
+                            datesOfSteps: datesOfSteps,
+                            steps: steps,
+                            path: '/steps-history'
+                        });
+                    }).catch(err => console.log(err));
                 }
             }
-
-
         }
     }
 };
@@ -322,6 +314,5 @@ exports.getWeatherData = (req, res, next) => {
                 path: '/weather-data',
                 weatherData: weatherData
             });
-        })
-        .catch(err => console.log(err));
+        }).catch(err => console.log(err));
 };
