@@ -3,5 +3,7 @@ This is a web app that logs steps for specific dates and produces reports based 
 
 In order to run code you must:
 
+```
 $ npm install
 $ npm start
+```
