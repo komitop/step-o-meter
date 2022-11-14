@@ -132,6 +132,7 @@ exports.getWeatherData = (req, res, next) => {
 
             weatherData.push({
                 stepDate: "2022-11-13",
+                steps: 3000,
                 hourlyData: [{
                     datetime: "00:00:00",
                     datetimeEpoch: 1668290400,
