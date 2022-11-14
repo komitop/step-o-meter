@@ -20,57 +20,62 @@
                             </div>
                         </div>
                     </div>
-                    <% weatherData.forEach(entry=> { %>
-                        <div class="row">
-                            <div class="col s12">
-                                <h3>Weather report for <%= entry.stepDate %> (<%= entry.steps %> steps)
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="card-panel">
-                                    <table class="striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Time</th>
-                                                <th></th>
-                                                <th>Temp</th>
-                                                <th>Feels Like</th>
-                                                <th>Humidity</th>
-                                            </tr>
-                                        </thead>
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="collapsible popout">
+                                <% weatherData.forEach(entry=> { %>
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <i class="material-icons">calendar_month</i>Weather report for <%= entry.stepDate
+                                                %>
+                                        </div>
+                                        <div class="collapsible-body">
+                                            <table class="striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Time</th>
+                                                        <th></th>
+                                                        <th>Temp</th>
+                                                        <th>Feels Like</th>
+                                                        <th>Humidity</th>
+                                                    </tr>
+                                                </thead>
 
-                                        <tbody>
-                                            <% entry.hourlyData.forEach(hourlyData=> { %>
-                                                <tr>
-                                                    <td>
-                                                        <%= hourlyData.datetime %>
-                                                    </td>
-                                                    <td>
-                                                        <span class="material-symbols-outlined">
-                                                            <%= hourlyData.icon.replaceAll('-', '_' ) %>
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <%= hourlyData.temp %> &#8451;
-                                                    </td>
-                                                    <td>
-                                                        <%= hourlyData.feelslike %> &#8451;
-                                                    </td>
-                                                    <td>
-                                                        <%= hourlyData.humidity %>%
-                                                    </td>
-                                                </tr>
-                                                <% }); %>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                                <tbody>
+                                                    <% entry.hourlyData.forEach(hourlyData=> { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= hourlyData.datetime %>
+                                                            </td>
+                                                            <td>
+                                                                <span class="material-symbols-outlined">
+                                                                    <%= hourlyData.icon.replaceAll('-', '_' ) %>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <%= hourlyData.temp %> &#8451;
+                                                            </td>
+                                                            <td>
+                                                                <%= hourlyData.feelslike %> &#8451;
+                                                            </td>
+                                                            <td>
+                                                                <%= hourlyData.humidity %>%
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </li>
+                                    <% }) %>
+                            </ul>
                         </div>
-                        <% }); %>
+                    </div>
+
+
                 </div>
             </div>
             <% } %>
 
-                <%- include('./includes/end.ejs') %>
+                <script src="/js/weather-data.js"></script>
+                   <%- include('./includes/end.ejs') %>
